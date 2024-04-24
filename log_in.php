@@ -1,88 +1,108 @@
 <?php
-
 include("connection.php");
 
-if(isset($_POST["signup"]))
-{
-    /*FORMDA ALDIĞIMIZ VERİLERİ DEĞİŞKENLERE ATAMA*/
-    $username=$_POST["username"];
-    $name=$_POST["name"];
-    $surname=$_POST["surname"];
-    $email=$_POST["email"];
-    $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
+$email = $password = "";
+$email_err = $password_err = "";
 
-    /*BU DEĞİŞKENLERİ VERİTABANINDAKİ TABLOLARIMIZA EKLEME*/ 
-    $add="INSERT INTO users(user_name, name, surname , email, password) VALUES('$username','$name','$surname','$email','$password')";
-    $addrun=mysqli_query($connection,$add);
-    if ($addrun) {
-        echo '.<div class="alert alert-success" role="alert">
-                Registration created successfully!
-                </div>';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "E-posta adresi boş bırakılamaz.";
+    } else {
+        $email = trim($_POST["email"]);
     }
-    else
-    {
-       echo' <div class="alert alert-danger" role="alert">
-             There was a problem in sign-up,Please check the information again.
-            </div>';
 
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Parola boş bırakılamaz.";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    if (empty($email_err) && empty($password_err)) {
+        $sql = "SELECT Katilimci_ID, email, password FROM kullanicilar WHERE email = ?";
+        if ($stmt = mysqli_prepare($connection, $sql)) {
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            $param_email = $email;
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_store_result($stmt);
+
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                
+                    if (mysqli_stmt_fetch($stmt)) {
+                        // Doğrudan veritabanından alınan hashlenmiş şifre ile kullanıcının girdiği şifreyi karşılaştırın
+                        if ($password === $hashed_password) {
+                            session_start();
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["email"] = $email;
+                
+                            header("location: welcome.php");
+                            exit();
+                        } else {
+                            $password_err = "Girilen parola yanlış.";
+                        }
+                    }
+                
+                } else {
+                    $email_err = "Bu e-posta adresiyle ilişkilendirilmiş bir hesap bulunamadı.";
+                }
+            } else {
+                echo "Oops! Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin.";
+            }
+            mysqli_stmt_close($stmt);
+        }
     }
     mysqli_close($connection);
 }
-
 ?>
 
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <title>ÜYE KAYIT FORMU</title>
+    <title>Giriş Yap</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container p-5">
-        <div class="card p-5 ">
-        <form action="log_in.php" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">User name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="username">
-    
+</head>
+<body style="background-color: #6699FF;">
+<div class="container p-5">
+    <div class="card p-5 ">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="registrationForm">
+            <div class="wrapper">
+                <h2>Giriş Yap</h2>
+                <p>Lütfen giriş yapmak için bilgilerinizi girin.</p>
+                <div class="mb-3">
+                    <label for="exampleInputEmail" class="form-label">E-posta Adresi</label>
+                    <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                    <div class="invalid-feedback"><?php echo $email_err; ?></div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword" class="form-label">Parola</label>
+                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="exampleInputPassword">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">Görünürlük</button>
+                    </div>
+                    <div class="invalid-feedback"><?php echo $password_err; ?></div>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Giriş Yap">
+                </div>
+                <div class="mb-3">
+                    <a href="sifre_yenileme.php">Şifremi unuttum?</a>
+                </div>
+                <p>Hesabınız yok mu? <a href="sign_up.php">Kayıt olun</a>.</p>
             </div>
-            
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="name">
-                
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Surname</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="surname">
-                
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-            </div>
-    
-            <button type="submit"name="signup" class="btn btn-primary">SIGN UP</button>
-             </form>
-
-
-
-        </div>
+        </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        var passwordInput = document.getElementById('exampleInputPassword');
+        var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.textContent = type === 'password' ? 'Görünürlük' : 'Gizle';
+    });
+</script>
 </body>
 </html>
