@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
                 
-                            header("location: welcome.php");
+                            header("location: index.php");
                             exit();
                         } else {
                             $password_err = "Girilen parola yanlış.";
@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body style="background-color: #6699FF;">
 <div class="container p-5">
+<a href="index.php" class="btn btn-secondary mb-3">Anasayfa</a>
     <div class="card p-5 ">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="registrationForm">
             <div class="wrapper">

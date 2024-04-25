@@ -14,6 +14,8 @@ $surname="";
 $email="";
 $phone="";
 $password="";
+$katilimci_turu="";
+$ktlm_err="";
 
 if(isset($_POST["kaydol"]))
 {
@@ -80,7 +82,17 @@ if(isset($_POST["kaydol"]))
     else {
         $password=$_POST["password"];
     }
-    $katilimci_turu=$_POST['katilimci_turu'];
+
+    //Katılımcı türü kontrolü...
+    if (empty($_POST["katilimci_turu"])) {
+        $ktlm_err="Katılımcı türünüzü seçmeniz gerekmektedir.";
+    }
+    else 
+    {
+        $katilimci_turu=$_POST['katilimci_turu'];
+    }
+    
+    
 
     if(empty($name_err) && empty($surname_err) && empty($email_err) && empty($phone_err) && empty($password_err)) {
         // Veritabanı kontrolü...
@@ -157,6 +169,7 @@ if(isset($_POST["kaydol"]))
 </head>
 <body>
 <div class="container p-5">
+    <a href="index.php" class="btn btn-secondary mb-3">Anasayfa</a>
     <div class="card p-5 ">
     <h2>Kayıt Formu</h2>
         <form action="sign_up.php" method="POST" id="registrationForm">
@@ -205,6 +218,11 @@ if(isset($_POST["kaydol"]))
                 <option selected disabled>Katılım türünü seçiniz.</option>
                 <option value="Görevli">Görevli</option>
                 <option value="Ziyaretçi">Ziyaretçi</option>
+                <?php  if(empty($_POST["katilimci_turu"])){
+                        echo $ktlm_err;
+                }
+                 ?>
+                
             </select>
 
             <div class="form-check mb-3">
