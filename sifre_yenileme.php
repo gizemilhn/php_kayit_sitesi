@@ -94,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         .error { color: red; }
     </style>
 </head>
-<body style="background-color: #6699FF;">
+<body style="background-color: #8fbc8f">
     <div class="container p-5">
     <div class="card p-5 ">
         <h2>Şifremi Unuttum</h2>

@@ -63,9 +63,131 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Giriş Yap</title>
+    <style>
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
+            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+        }
+        .menu-items {
+            display: flex;
+        }
+
+        .menu-item {
+            margin-right: 20px;
+        }
+
+        .menu-item:last-child {
+            margin-right: 0;
+        }
+
+        .user-actions {
+            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+        }
+
+        .user-actions a {
+            margin-left: 10px;
+        }
+
+        header .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-item:hover .submenu {
+            display: block;
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            padding: 10px;
+            z-index: 1;
+        }
+        .submenu a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 5px;
+        }
+        .submenu a:hover {
+            background-color: #3cb371; /* Buton rengiyle uyumlu renk */
+        }
+        .btn-login {
+            background-color: transparent;
+            color: #3cb371;
+            border: 2px solid #3cb371;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-login:hover {
+            background-color: #3cb371;
+            color: #fff;
+        }
+        .btn-register {
+            margin-right: 20px;
+            background-color: transparent;
+            color: #3cb371;
+            border: 2px solid #3cb371;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-register:hover {
+            background-color: #3cb371;
+            color: #fff;
+        }
+        .btn-more {
+            display: block;
+            margin-top: 10px;
+            background-color: #3cb371;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-more:hover {
+            background-color: #2e8b57;
+        }
+        
+
+ </style>
+ <head>
+ <body>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="background-color: #6699FF;">
+<body style="background-color: #8fbc8f;">
+<header>
+    <div class="container">
+        <div class="logo">
+            <a href="index.php"><img src="images/logo.png" alt="Website Logo"></a>
+        <div>
+    </div>
+    <div>
+        </div>
+        <div class="user-actions">
+            <a href="log_in.php" class="btn-login">Giriş Yap</a>
+            <a href="sign_up.php" class="btn-register">Kayıt Ol</a>
+        </div>
+    </div>
+</header>
 <div class="container p-5">
 <a href="index.php" class="btn btn-secondary mb-3">Anasayfa</a>
     <div class="card p-5 ">

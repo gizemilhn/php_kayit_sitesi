@@ -4,243 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuar Alanı Etkinlikleri</title>
-    <style>
-        /* Basit CSS */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            margin-left: 10px;
-            margin-right: 10px;
-            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
-        }
-        .menu-items {
-            display: flex;
-        }
-
-        .menu-item {
-            margin-right: 20px;
-        }
-
-        .menu-item:last-child {
-            margin-right: 0;
-        }
-
-        .user-actions {
-            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
-        }
-
-        .user-actions a {
-            margin-left: 10px;
-        }
-
-        header .menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .menu-item:hover .submenu {
-            display: block;
-        }
-        .submenu {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            padding: 10px;
-            z-index: 1;
-        }
-        .submenu a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
-        .submenu a:hover {
-            background-color: #3cb371; /* Buton rengiyle uyumlu renk */
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        footer .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        footer .footer-content .col {
-            flex: 1 1 20%;
-            margin: 10px;
-        }
-        footer h4 {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        footer p {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        footer a {
-            font-size: 14px;
-            text-decoration: none;
-            color: #fff;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .event-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: nowrap; /* Kartlar sıralı bir şekilde yerleştirilecek */
-        }
-
-        .event-card {
-            width: calc(30% - 20px); /* Kartların genişliği eşit olacak ve aralarında 20px boşluk olacak */
-            margin-top: 20px;
-            margin-right: 20px;
-            margin-left : 20px;
-            margin-bottom: 20px; /* Kartlar alt alta yerleştirilecek */
-            border: 1px solid #ccc; /* Kartlara kenarlık ekleyebilirsiniz */
-            border-radius: 5px; /* Kartlara köşe yuvarlama ekleyebilirsiniz */
-            padding: 20px; /* Kartların içeriğinden boşluk bırakabilirsiniz */
-        }
-
-        .event-img {
-            width: 300px; 
-            height: auto;
-            margin-right: 20px;
-        }
-
-        .event-details {
-            flex: 1;
-            overflow: hidden;
-        }
-        .event-description {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            overflow: hidden;
-        }
-
-        .search-bar {
-            margin: 0 auto; 
-            text-align: center; /* İçeriği ortala */
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-        .search-bar input[type="text"] {
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            flex: 1;
-            margin-right: 10px;
-        }
-        .search-bar button[type="submit"] {
-            background-color: #8fbc8f;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .search-bar button[type="submit"]:hover {
-            background-color: #3cb371;
-        }
-        .btn-login {
-            background-color: transparent;
-            color: #3cb371;
-            border: 2px solid #3cb371;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-login:hover {
-            background-color: #3cb371;
-            color: #fff;
-        }
-        .btn-register {
-            margin-right: 20px;
-            background-color: transparent;
-            color: #3cb371;
-            border: 2px solid #3cb371;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-register:hover {
-            background-color: #3cb371;
-            color: #fff;
-        }
-        .btn-more {
-            display: block;
-            margin-top: 10px;
-            background-color: #3cb371;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .btn-more:hover {
-            background-color: #2e8b57;
-        }
-         .menu-button {
-            background-color: #8fbc8f; 
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            margin-right: 20px;
-        }
-
-        .menu-button:last-child {
-            margin-right: 0;
-        }
-
-        .menu-button:hover {
-            background-color: #3cb371; 
-        }
-        .home-icon {
-            cursor: pointer;
-        }
-        .home-icon img {
-            width: 40px;
-            height: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 </head>
 <body>
+<body style="background-color: #8fbc8f;">
 <header>
     <div class="container">
-    <div class="logo">
+        <div class="logo">
+        <span class="tooltip" title="Ana Sayfa"> <!-- title, tooltip içeriğini belirtir -->
             <a href="index.php"><img src="images/logo.png" alt="Website Logo"></a>
+        </span>
             <div class="home-icon" onclick="goToHomePage()">
                 <img src="images/home.png" alt="Ana Sayfa">
             </div>
@@ -249,12 +24,7 @@
             <a href="schedule.php" class="menu-button">Fuar Takvimi</a>
             <a href="hizmetler.php" class="menu-button">Hizmetlerimiz</a>
             <a href="references.php" class="menu-button">Referanslarımız</a>
-            <div class="menu-item">
-                <button class="menu-button" onclick="toggleDropdown()">Etkinliğini Yarat</button>
-                <div class="submenu" id="dropdownMenu">
-                    <a href="etkinlik_yarat.php">Bize Ulaş</a>
-                </div>
-            </div>
+            <a href="etkinlik_yarat.php" class="menu-button">Etkinliğini Yarat</a>
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Etkinlik Ara...">
@@ -266,7 +36,6 @@
         </div>
     </div>
 </header>
-
 <div class="container">
     
 
@@ -277,16 +46,16 @@
             <div class="event-details">
                 <h2>YAZILIM FUARI</h2>
                 <p class="event-description">Kalite’24… Üretimde daha üst düzey kaliteyi arayan firmaların aradıklarına her aşamada cevap verecek firmaların bir arada bulunduğu Türkiye’deki tek organizasyon.</p>
-                <a href="event3.php" class="btn-more">Daha Fazlasını Gör</a>
+                <a href="yzlm_fuar.php" class="btn-more">Daha Fazlasını Gör</a>
             </div>
         </div> 
 
         <div class="event-card">
             <img src="images/otmtv.png" class="event-img" alt="Etkinlik Görseli">
             <div class="event-details">
-                <h2>OTOMOTİV FUARI</h2>
+                <h2>OTOSAN'24 OTOMOTİV FUARI</h2>
                 <p class="event-description">KOtomotiv satış sonrası endüstrisi için dünyanın lider ticaret fuarı markası Automechanika'nın Türkiye'deki tek etkinliği olan Automechanika Istanbul,23-26 Mayıs 2024 tarihleri arasında İstanbul TÜYAP Fuar ve Kongre Merkezi'nde düzenlenecek.</p>
-                <a href="event3.php" class="btn-more">Daha Fazlasını Gör</a>
+                <a href="otmtv_fuar.php" class="btn-more">Daha Fazlasını Gör</a>
             </div>
         </div>
 

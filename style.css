@@ -1,0 +1,298 @@
+/* Genel stil */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #3d2f99;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Basit CSS */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
+    height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+}
+.menu-items {
+    display: flex;
+}
+
+.menu-item {
+    margin-right: 20px;
+}
+
+.menu-item:last-child {
+    margin-right: 0;
+}
+
+.user-actions {
+    margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+}
+
+.user-actions a {
+    margin-left: 10px;
+}
+
+header .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu-item:hover .submenu {
+    display: block;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 10px;
+    z-index: 1;
+}
+.submenu a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+.submenu a:hover {
+    background-color: #3cb371; /* Buton rengiyle uyumlu renk */
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+footer .footer-content .col {
+    flex: 1 1 20%;
+    margin: 10px;
+}
+footer h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+footer p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+footer a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+.event-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* Kartlar sıralı bir şekilde yerleştirilecek */
+    margin: 0 40px;
+}
+
+.event-card {
+    background-color:#f0f8ff;
+    width: calc(30% - 20px); /* Kartların genişliği eşit olacak ve aralarında 20px boşluk olacak */
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left : 20px;
+    margin-bottom: 20px; /* Kartlar alt alta yerleştirilecek */
+    border: 1px solid #ccc; /* Kartlara kenarlık ekleyebilirsiniz */
+    border-radius: 5px; /* Kartlara köşe yuvarlama ekleyebilirsiniz */
+    padding: 20px; /* Kartların içeriğinden boşluk bırakabilirsiniz */
+}
+
+.event-img {
+    display: block;
+    width: 300px; 
+    height: auto;
+    margin: 0 auto;
+
+}
+
+.event-details {
+    flex: 1;
+    overflow: hidden;
+}
+.event-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.search-bar {
+    margin: 0 auto; 
+    text-align: center; /* İçeriği ortala */
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    margin-right: 10px;
+}
+.search-bar button[type="submit"] {
+    background-color: #8fbc8f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.search-bar button[type="submit"]:hover {
+    background-color: #3cb371;
+}
+.btn-login {
+    background-color: transparent;
+    color: #3cb371;
+    border: 2px solid #3cb371;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.btn-login:hover {
+    background-color: #3cb371;
+    color: #fff;
+}
+.btn-register {
+    margin-right: 20px;
+    background-color: transparent;
+    color: #3cb371;
+    border: 2px solid #3cb371;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.btn-register:hover {
+    background-color: #3cb371;
+    color: #fff;
+}
+.btn-more {
+    display: block;
+    margin-top: 10px;
+    background-color: #3cb371;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.btn-more:hover {
+    background-color: #2e8b57;
+}
+ .menu-button {
+    background-color: #8fbc8f; 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 20px;
+}
+
+.menu-button:last-child {
+    margin-right: 0;
+}
+
+.menu-button:hover {
+    background-color: #3cb371; 
+}
+.home-icon {
+    cursor: pointer;
+}
+.home-icon img {
+    width: 40px;
+    height: auto;
+}
+        .tooltip {
+    position: relative; /* Görece konumlandırma */
+    display: inline-block; /* Metni logonun yanında görüntülemek için */
+}
+
+.tooltip::after {
+    content: attr(title); /* Tooltip içeriğini title niteliğinden al */
+    position: absolute; /* Mutlak konumlandırma */
+    background-color: black; /* Arkaplan rengi */
+    color: white; /* Yazı rengi */
+    padding: 5px; /* İçerik etrafındaki dolgu */
+    border-radius: 5px; /* Kenar yuvarlatma */
+    z-index: 1; /* Diğer öğelerin üzerinde kalması için */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s; /* Geçiş efekti */
+    bottom: 125%; /* Logonun altında */
+    left: 50%; /* Logonun tam ortasında */
+    transform: translateX(-50%); /* Yatayda merkezlemek için */
+}
+
+.tooltip:hover::after {
+    opacity: 1; /* Üzerine gelindiğinde görünür hale getir */
+}
