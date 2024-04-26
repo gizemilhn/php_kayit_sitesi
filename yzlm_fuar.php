@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yazılım Fuarı</title>
     <style>
+        @font-face {
+        font-family: 'CustomFont';
+        src: url('font/Involve-VF.ttf') format('ttf'), /* WOFF2 formatı */
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'CustomFont', ;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-image: url('images/bck_yzlm.png'); /* Arkaplan resmini burada belirtin */
-            background-size: cover; /* Resmi ekran boyutuna göre otomatik olarak boyutlandırır */
-            background-position: center; /* Resmi sayfanın ortasına yerleştirir */
-            background-repeat: no-repeat;
+            
         }
 
         header {
-            background-color: #191970;
+            background-color: #22546B;
             color: #fff;
             padding: 20px;
             display: flex;
@@ -52,7 +53,7 @@
         }
 
         footer {
-            background-color: #191970;
+            background-color: #22546B;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -61,8 +62,8 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #add8e6;
-            color: #4682b4;
+            background-color: #D3DBDD;
+            color: #232C31;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
@@ -105,7 +106,7 @@
         }
 
         .card-text {
-            font-size: 14px; /* Kart metninin font boyutunu küçültelim */
+            font-size: 16px; /* Kart metninin font boyutunu küçültelim */
             line-height: 1.6;
         }
 
@@ -115,7 +116,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #D3DBDD;">
 <header>
     <img src="images/yzlm_logo.png" alt="Yazılım Fuarı Logo" class="logo">
     <nav>
@@ -136,7 +137,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h2 class="card-title">Yazılım Fuarı</h2>
+                        <h2 class="card-title">Y&Y Yazılım Fuarı</h2>
                         <p class="card-text">Yazılım Fuarı, her yıl yazılım dünyasının önde gelen profesyonellerini, girişimcileri ve meraklılarını bir araya getirerek inovasyonu ve işbirliğini teşvik eder. Amacımız, katılımcılarımıza en son teknolojileri tanıtmak, deneyimlerini paylaşmak ve iş bağlantıları kurmalarına olanak sağlamaktır.</p>
                         <p class="card-text">Etkinliğimize katılan dünyaca ünlü yazılım şirketlerinden bazıları:</p>
                         <ul class="card-text">
@@ -153,7 +154,7 @@
                         </p>
                         <h2>Kayıt</h2>
                         <p>
-                        <p class="card-text">Etkinliğimize katılmak için şimdi kayıt olun ve bu heyecan verici deneyimi kaçırmayın! Kayıt için <a href="fuar_kayit.php">tıklayın</a>.
+                        <p class="card-text">Etkinliğimize katılmak için şimdi kayıt olun ve bu heyecan verici deneyimi kaçırmayın! Kayıt için <a href="yaz_fuar_kayit.php">tıklayın</a>.
                         </p>
                         <h2>İletişim</h2>
                         <p>

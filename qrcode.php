@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etkinlik Yaratma Sayfası</title>
+    <title><?php echo $etkinlik_bilgileri['etkinlik_adi']; ?></title>
     <style>
         /* Basit CSS */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Arka plan rengi */
         }
         .container {
             max-width: 800px;
@@ -27,6 +28,7 @@
             color: #fff;
             padding: 20px 0;
             text-align: center;
+            margin-top: 30px; /* Footer'ı sayfanın tam altına almak için */
         }
         footer .footer-content {
             display: flex;
@@ -52,91 +54,84 @@
             display: block;
             margin-bottom: 5px;
         }
-        .form-container {
-            margin-top: 20px;
+        .references {
+            text-align: center;
+            margin-top: 30px;
         }
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+        .references h2 {
+            margin-bottom: 20px;
         }
-        .form-container input[type="text"],
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+        .company-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
-        .form-container textarea {
+        .company {
+            width: 200px;
             height: 100px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .form-container button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+        .past-events {
+            margin-bottom: 30px;
+        }
+        .past-events h3 {
+            margin-bottom: 10px;
+        }
+        .event {
+            margin-bottom: 10px;
+        }
+        .qr-code-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .qr-code-container img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 300px;
+        }
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            font-size: 16px;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .form-container button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        .custom-button {
-            background-color: #8fbc8f; 
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
         }
-
-        .custom-button:hover {
-            background-color: #3cb371; 
+        .download-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
 <header>
-
     <div class="container">
-    
-        <h1>Sizin İhtiyaçlarınıza Yönelik Konferans ve Organizasyon Yönetimi</h1>
+        <h1><?php echo $etkinlik_bilgileri['etkinlik_adi']; ?></h1>
+        <p><?php echo $etkinlik_bilgileri['aciklama']; ?></p>
     </div>
 </header>
 
 <div class="container">
-<div class="mb-3">
-            <button class="custom-button" onclick="goToIndexPage()">Ana Sayfa</button>
-            </div>
-    <div class="form-container">
-        <form action="etkinlik_ekle.php" method="POST">
-            <label for="ad_soyad">Ad Soyad:</label>
-            <input type="text" id="ad_soyad" name="ad_soyad" required>
+    <div class="references">
+        <h2>Etkinlik Tarihi ve Saati</h2>
+        <p>Tarih: <?php echo $etkinlik_bilgileri['tarih']; ?> - Saat: <?php echo $etkinlik_bilgileri['saat']; ?></p>
+    </div>
 
-            <label for="pozisyon">Pozisyon:</label>
-            <input type="text" id="pozisyon" name="pozisyon" required>
+    <div class="qr-code-container">
+        <img src="<?php echo $qr_path; ?>" alt="QR Kod">
+        <a href="<?php echo $qr_path; ?>" download="qr_code_<?php echo time(); ?>.png" class="download-btn">QR Kodu İndir</a>
+    </div>
 
-            <label for="sirket_adi">Şirket Adı:</label>
-            <input type="text" id="sirket_adi" name="sirket_adi" required>
-
-            <label for="sektor">Sektör:</label>
-            <input type="text" id="sektor" name="sektor" required>
-
-            <label for="email">E-posta:</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="telefon">Telefon:</label>
-            <input type="text" id="telefon" name="telefon" required>
-
-            <label for="mesaj">Bize İletmek İstedikleriniz:</label>
-            <textarea id="mesaj" name="mesaj" required></textarea>
-
-            <button type="submit">Gönder</button>
-        </form>
+    <div class="references">
+        <h2>Etkinlik Görseli</h2>
+        <img src="images/etkinlik_gorseli.jpg" alt="Etkinlik Görseli" style="display: block; margin: 0 auto;">
     </div>
 </div>
 
@@ -144,7 +139,7 @@
     <div class="footer-content">
         <div class="col">
             <h4>Bize Ulaşın</h4>
-            <p><strong>Address:</strong> Konferans Etkinlikleri Ltd. Şti. İstanbul</p>
+            <p><strong>Adres:</strong> Konferans Etkinlikleri Ltd. Şti. İstanbul</p>
             <p><strong>Telefon:</strong> +90 (544) 199 4254</p>
             <p><strong>Çalışma Saatleri:</strong> 08:00 - 20:00, Pazartesi - Cumartesi</p>
         </div>
@@ -179,10 +174,5 @@
         <p>© Konferans Etkinlikleri Ltd. Şti. - Tüm Hakları Saklıdır.</p>
     </div>
 </footer>
-<script>
-        function goToIndexPage() {
-            window.location.href = "index.php"; 
-        }
-    </script>
 </body>
 </html>

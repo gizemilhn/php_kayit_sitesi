@@ -16,14 +16,11 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-image: url('.png'); /* Arkaplan resmini burada belirtin */
-            background-size: cover; /* Resmi ekran boyutuna göre otomatik olarak boyutlandırır */
-            background-position: center; /* Resmi sayfanın ortasına yerleştirir */
-            background-repeat: no-repeat;
+            background-color: #C9BBCF
         }
 
         header {
-            background-color: #2B4865;
+            background-color: #898AA6;
             color: #fff;
             padding: 20px;
             display: flex;
@@ -56,7 +53,7 @@
         }
 
         footer {
-            background-color: #2B4865;
+            background-color: #898AA6;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -65,8 +62,8 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #F4E6B3;
-            color: #836F45;
+            background-color: #B7D3DF;
+            color: #748DA6;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
@@ -75,14 +72,18 @@
         }
 
         .button:hover {
-            background-color: #CDB97F
+            background-color: #9CB4CC;
         }
 
         .logo {
-            width: 150px;
+            width: 100px;
             height: auto;
             margin-right: 20px;
         }
+
+       
+
+        
         .card {
         background-color: #fff;
         border-radius: 10px;
@@ -112,7 +113,7 @@
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 600px) 
       table {
         border: 0;
       }
@@ -129,23 +130,22 @@
         padding-top: 8px;
         padding-bottom: 8px;
       }
-    }
-  </style>
+    </style>
 </head>
-<body><header>
-    <img src="images/otmtv_logo.png" alt="Otomotiv Fuarı Logo" class="logo">
-    <h2>Etkinlik Programı</h2>
+<body>
+<header>
+    <img src="images/grsm_logo.png" alt="Girişim Fuarı Logo" class="logo">
     <nav>
         <ul>
-            <li><a href="otmtv_fuar.php" class="button">Ana Sayfa</a></li>
-            <li><a href="otmtv_program.php" class="button">Program</a></li>
-            <li><a href="otomotiv_kayit.php" class="button">Kayıt</a></li>
+            <li><a href="grsm_fuar.php" class="button">Ana Sayfa</a></li>
+            <li><a href="grsm_program.php" class="button">Program</a></li>
+            <li><a href="grsm_kayit.php" class="button">Kayıt</a></li>
             <li><a href="iletisim.php" class="button">İletişim</a></li>
         </ul>
     </nav>
 </header>
-
-<div class="card">
+    <main>
+    <div class="card">
 
 <table>
   <tr>
@@ -155,15 +155,18 @@
   </tr>
   <?php
     $program = array(
-      array("10:00 - 10:45", "Türkiye'nin Otomobil İhracat Geçmişi", "Cem Koçyiğit"),
+      array("10:00 - 10:45", "İş hayatında kadın olmak", "Elis Yılmaz
+      "),
       array("10:45 - 11:00", "Mola", ""),
-      array("11:00 - 11:45", "Elektrikli Araçlar", "Hatice Kalkan"),
+      array("11:00 - 11:45", "Kadın girişimci olmak", "Eylül Sezen
+      "),
       array("11:45 - 13:00", "Öğle Arası", ""),
-      array("13:00 - 13:45", "Türkiye'nin Kablo İhracatına Genel Bakış", "Ayşe Üçler"),
+      array("13:00 - 13:45", "Girişimcilik hikayem", "Aslı Uzun"),
       array("13:45 - 14:00", "Ara", ""),
-      array("14:00 - 14:45", "Geçmişten Günümüze Tofaş ", "Fatma Öztürk"),
+      array("14:00 - 14:45", "Kadınların iş hayatındaki yeri ", "Didem Aksak
+      "),
       array("14:45 - 15:00", "Ara", ""),
-      array("15:00 - 15:45", "Sosyal Konuk", "Serhan Acar")
+      array("15:00 - 15:45", "Sosyal Konuk", "Ümmiye Koçak")
     );
 
     foreach ($program as $etkinlik) {

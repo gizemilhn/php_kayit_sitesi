@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etkinlik Programı</title>
   <style>
-    body {
-        font-family: Arial, sans-serif;
+        @font-face {
+        font-family: 'CustomFont';
+        src: url('font/Involve-VF.ttf') format('ttf'), /* WOFF2 formatı */
+        }
+        body {
+            font-family: 'CustomFont', ;
         margin: 0;
         padding: 0;
-        background-image: url('images/bck_yzlm.png');
-        background-size: cover;
-        background-position: center;
+        
          }
-     header {
-            background-color: #191970;
+        header {
+            background-color: #22546B;
             color: #fff;
             padding: 20px;
             display: flex;
@@ -50,7 +52,7 @@
 
     
         footer {
-            background-color: #191970;
+            background-color: #22546B;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -59,8 +61,8 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #add8e6;
-            color: #4682b4;
+            background-color: #D3DBDD;
+            color: #232C31;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
@@ -119,14 +121,15 @@
     }
   </style>
 </head>
-<body><header>
+<body style="background-color: #D3DBDD;">
+    <header>
     <img src="images/yzlm_logo.png" alt="Yazılım Fuarı Logo" class="logo">
     <h2>Etkinlik Programı</h2>
     <nav>
         <ul>
             <li><a href="yzlm_fuar.php" class="button">Ana Sayfa</a></li>
             <li><a href="yazlm_program.php" class="button">Program</a></li>
-            <li><a href="fuar_kayit.php" class="button">Kayıt</a></li>
+            <li><a href="yaz_fuar_kayit.php" class="button">Kayıt</a></li>
             <li><a href="iletisim.php" class="button">İletişim</a></li>
         </ul>
     </nav>
@@ -142,15 +145,15 @@
   </tr>
   <?php
     $program = array(
-      array("10:00 - 10:45", "Makine Öğrenmesi", "Ahmet Yılmaz"),
+      array("10:00 - 10:45", "Günümüzde Makine Öğrenmesi", "Ahmet Yılmaz"),
       array("10:45 - 11:00", "Mola", ""),
-      array("11:00 - 11:45", "Otomobil Sporlarında Teknoloji Kullanımı", "Eren Üçlertoprağı"),
+      array("11:00 - 11:45", "Yazılımda Yapay Zeka Kullanımı", "Eren Üçlertoprağı"),
       array("12:00 - 13:00", "Öğle Arası", ""),
-      array("13:00 - 13:45", "Türkiye'nin Kablo İhracatına Genel Bakış", "Ayşe Üçler"),
+      array("13:00 - 13:45", "Türkiye'nin Yazılım Gelişmelerine Genel Bakış", "Ayşe Üçler"),
       array("13:45 - 14:00", "Ara", ""),
-      array("14:00 - 14:45", "Robotlar ve Uygulamalar", "Semih Gümüş"),
+      array("14:00 - 14:45", "Robotlar ve Yazılım", "Semih Gümüş"),
       array("14:45 - 15:00", "Ara", ""),
-      array("15:00 - 15:45", "Sosyal Konuk", "Serhan Acar")
+      array("15:00 - 15:45", "Sosyal Konuk", "Sadi Evren Şeker")
     );
 
     foreach ($program as $etkinlik) {

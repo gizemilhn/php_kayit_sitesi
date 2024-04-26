@@ -127,7 +127,7 @@ if(isset($_POST["kaydol"]))
     <title>KAYIT FORMU</title>
     <style>
         header {
-            background-color: #333;
+            background-color: #516C8D;
             color: #fff;
             padding: 10px 0;
             text-align: center;
@@ -187,57 +187,73 @@ if(isset($_POST["kaydol"]))
             background-color: #3cb371; /* Buton rengiyle uyumlu renk */
         }
         .btn-login {
-            background-color: transparent;
-            color: #3cb371;
-            border: 2px solid #3cb371;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-login:hover {
-            background-color: #3cb371;
-            color: #fff;
-        }
-        .btn-register {
-            margin-right: 20px;
-            background-color: transparent;
-            color: #3cb371;
-            border: 2px solid #3cb371;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-register:hover {
-            background-color: #3cb371;
-            color: #fff;
-        }
-        .btn-more {
-            display: block;
-            margin-top: 10px;
-            background-color: #3cb371;
-            color: #fff;
+            background-color: #DDDDDD; 
+            color: #0D242F;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            margin-right: 5px;
         }
-        .btn-more:hover {
-            background-color: #2e8b57;
+        .btn-login:hover {
+            background-color: #9EB8D9; 
+        }
+        .btn-register {
+            background-color: #DDDDDD; 
+            color: #0D242F;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .btn-register:hover {
+            background-color: #9EB8D9; 
+        }
+      
+        footer {
+            background-color: #516C8D;
+            color: #0D242F;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        footer .footer-content .col {
+            flex: 1 1 20%;
+            margin: 10px;
+        }
+        footer h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        footer a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #0D242F;
+            display: block;
+            margin-bottom: 5px;
         }
         
 
  </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="background-color: #8fbc8f;">
+<body style="background-color: #DDDDDD;">
 
 <header>
     <div class="container">
         <div class="logo">
-            <a href="index.php"><img src="images/logo.png" alt="Website Logo"></a>
+            <a href="index.php"><img src="images/logo_.png" alt="Website Logo"></a>
         <div>
     </div>
     <div>
@@ -329,5 +345,44 @@ if(isset($_POST["kaydol"]))
         submitBtn.disabled = !this.checked;
     });
 </script>
+<footer>
+    <div class="footer-content">
+        <div class="col">
+            <h4>Bize Ulaşın</h4>
+            <p><strong>Address:</strong> Konferans Etkinlikleri Ltd. Şti. İstanbul</p>
+            <p><strong>Telefon:</strong> +90 (544) 199 4254</p>
+            <p><strong>Çalışma Saatleri:</strong> 08:00 - 20:00, Pazartesi - Cumartesi</p>
+        </div>
+        <div class="col">
+            <h4>Hakkında</h4>
+            <a href="#">Hakkımızda</a>
+            <a href="#">Etkinliklerimiz</a>
+            <a href="#">Gizlilik Politikası</a>
+            <a href="#">Şartlar ve koşullar</a>
+            <a href="#">Bize Ulaşın</a>
+        </div>
+        <div class="col">
+            <h4>Hesap</h4>
+            <a href="#">Giriş Yap</a>
+            <a href="#">Kayıt Ol</a>
+            <a href="#">Etkinliklerim</a>
+            <a href="#">Sipariş Takip</a>
+            <a href="#">Yardım</a>
+        </div>
+        <div class="col">
+            <h4>Uygulamayı İndir</h4>
+            <p>Google Play veya App Store</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="">
+                <img src="img/pay/play.jpg" alt="">
+            </div>
+            <p>Güvenli Ödeme</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© Konferans Etkinlikleri Ltd. Şti. - Tüm Hakları Saklıdır.</p>
+    </div>
+</footer>
 </body>
 </html>

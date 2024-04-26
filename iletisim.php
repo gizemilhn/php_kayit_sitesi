@@ -14,14 +14,12 @@
         background-position: center;
          }
 
-    header {
-        background-color: #333;
+         header {
+        background-color: #516C8D;
         color: #fff;
-        padding: 20px;
-        display: flex;
-        align-items: center;
+        padding: 10px 0;
+        text-align: center;
         }
-
         header h1 {
         margin: 0;
         }
@@ -51,8 +49,8 @@
         .button {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #8fbc8f;
-        color: #4682b4;
+        background-color: #DDDDDD;
+        color:  #0D242F;
         text-align: center;
         text-decoration: none;
         font-size: 16px;
@@ -61,7 +59,7 @@
         }
 
         .button:hover {
-        background-color: #3cb371;
+        background-color: #9EB8D9;
         }
 
         .logo {
@@ -75,12 +73,14 @@
          margin-right:20px;
           }
         .card {
-        background-color: #ffffff;
+        color:  #0D242F;
+        background-color: #FFF7F1;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
         margin: 20px auto; /* Sayfa ortasına hizalamak için */
-        width: 80%; /* Kartın genişliğini ayarlayalım */
+        width: 40%; /* Kartın genişliğini ayarlayalım */
+        text-align: center;
         }
 
         .card p {
@@ -97,8 +97,8 @@
         </style>
         </style>
 </head>
-<body><header>
-    <img src="images/logo.png" alt="Logo" class="logo">
+<body style="background-color: #DDDDDD;"><header>
+    <img src="images/logo_.png" alt="Logo" class="logo">
     <h2>İletişim</h2>
     <nav>
         <ul>
@@ -107,7 +107,7 @@
         </ul>
     </nav>
 </header>
-<div class="card">
+<div class="card" style= color:#0D242F>
     <h4>Bize Ulaşın</h4>
     <p><strong>Adres:</strong> Konferans Etkinlikleri Ltd. Şti. İstanbul</p>
     <p><strong>Telefon:</strong> +90 (544) 199 4254</p>

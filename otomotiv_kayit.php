@@ -107,22 +107,16 @@ if(isset($_POST["kaydol"]))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KAYIT FORMU</title>
     <style>
-        @font-face {
-        font-family: 'CustomFont';
-        src: url('font/Involve-VF.ttf') format('ttf'), /* WOFF2 formatı */
-        }
         body {
-            font-family: 'CustomFont', ;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            
-        }
-
-        header {
-            background-color: #22546B;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+         }
+         header {
+            background-color: #2B4865;
             color: #fff;
             padding: 20px;
             display: flex;
@@ -148,134 +142,60 @@ if(isset($_POST["kaydol"]))
             color: #fff;
             text-decoration: none;
         }
-
         main {
             flex: 1;
             padding: 20px;
         }
+        
 
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #F4E6B3;
+            color: #836F45;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #CDB97F
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
         footer {
-            background-color: #22546B;
+            background-color: #2B4865;
             color: #fff;
             text-align: center;
             padding: 10px 0;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #D3DBDD;
-            color: #232C31;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #b0c4de;
-        }
-
-        .logo {
-            width: 150px;
-            height: auto;
-            margin-right: 20px;
-        }
-
-        
-        .logo img {
-            margin-left: 10px;
-            margin-right: 10px;
-            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
-        }
-        .menu-items {
-            display: flex;
-        }
-
-        .menu-item {
-            margin-right: 20px;
-        }
-
-        .menu-item:last-child {
-            margin-right: 0;
-        }
-
-        .user-actions {
-            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
-        }
-
-        .user-actions a {
-            margin-left: 10px;
-        }
-
-        header .menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .menu-item:hover .submenu {
-            display: block;
-        }
-        .submenu {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            padding: 10px;
-            z-index: 1;
-        }
-        .submenu a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
-        .submenu a:hover {
-            background-color: #3cb371; /* Buton rengiyle uyumlu renk */
-        }
-        
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #D3DBDD;
-            color: #232C31;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #b0c4de;
-        }
-        .logo {
-            width: 150px;
-            height: auto;
-            margin-right: 20px;
         }
         
 
  </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="background-color: #D3DBDD;">
 
+<body style="background-color: #DDDDDD;">
 <header>
-    <img src="images/yzlm_logo.png" alt="Yazılım Fuarı Logo" class="logo">
+    <img src="images/otmtv_logo.png" alt="Otomotiv Fuarı Logo" class="logo">
     <nav>
         <ul>
-            <li><a href="yzlm_fuar.php" class="button">Ana Sayfa</a></li>
-            <li><a href="yazlm_program.php" class="button">Program</a></li>
-            <li><a href="yaz_fuar_kayit.php" class="button">Kayıt</a></li>
+            <li><a href="otmtv_fuar.php" class="button">Ana Sayfa</a></li>
+            <li><a href="otmtv_program.php" class="button">Program</a></li>
+            <li><a href="otomotiv_kayit.php" class="button">Kayıt</a></li>
             <li><a href="iletisim.php" class="button">İletişim</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="container p-5">
-    <a href="yzlm_fuar.php" class="btn btn-secondary mb-3">Geri</a>
+    <a href="otmtv_fuar.php" class="btn btn-secondary mb-3">Geri</a>
     <div class="card p-5 ">
     <h2>Kayıt Formu</h2>
         <form action="sign_up.php" method="POST" id="registrationForm">
@@ -303,7 +223,7 @@ if(isset($_POST["kaydol"]))
                  ?>
                 
             </select>
-            <a href="qrcode.php" button type="submit" style="background-color: #D3DBDD" name="kaydol" class="btn" id="submitBtn">Kayıt Ol</button></a>
+            <a href="qrcode.php" button type="submit"style="background-color: #F4E6B3" name="kaydol" class="btn" id="submitBtn">Kayıt Ol</button></a>
         </form>
     </div>
 </div>
