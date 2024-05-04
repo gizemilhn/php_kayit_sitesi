@@ -112,28 +112,11 @@
 </head>
 <body>
 <header>
-    <div class="container">
-        <h1><?php echo $etkinlik_bilgileri['etkinlik_adi']; ?></h1>
-        <p><?php echo $etkinlik_bilgileri['aciklama']; ?></p>
-    </div>
+    <h1>Qr Kodunuz</h1>
 </header>
 
-<div class="container">
-    <div class="references">
-        <h2>Etkinlik Tarihi ve Saati</h2>
-        <p>Tarih: <?php echo $etkinlik_bilgileri['tarih']; ?> - Saat: <?php echo $etkinlik_bilgileri['saat']; ?></p>
-    </div>
 
-    <div class="qr-code-container">
-        <img src="<?php echo $qr_path; ?>" alt="QR Kod">
-        <a href="<?php echo $qr_path; ?>" download="qr_code_<?php echo time(); ?>.png" class="download-btn">QR Kodu İndir</a>
-    </div>
 
-    <div class="references">
-        <h2>Etkinlik Görseli</h2>
-        <img src="images/etkinlik_gorseli.jpg" alt="Etkinlik Görseli" style="display: block; margin: 0 auto;">
-    </div>
-</div>
 
 <footer>
     <div class="footer-content">

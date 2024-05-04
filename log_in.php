@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($email_err) && empty($password_err)) {
-        $sql = "SELECT Katilimci_ID, email, password FROM kullanicilar WHERE email = ?";
+        $sql = "SELECT admin_id, kullanici_adi, password FROM adminler WHERE email = ?";
         if ($stmt = mysqli_prepare($connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
@@ -27,30 +27,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $db_password);
                 
                     if (mysqli_stmt_fetch($stmt)) {
-                        // Doğrudan veritabanından alınan hashlenmiş şifre ile kullanıcının girdiği şifreyi karşılaştırın
-                        if ($password === $hashed_password) {
+                        if ($password === $db_password) { // Düz metin olarak saklanan parolaları karşılaştır
                             session_start();
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["email"] = $email;
+                            $_SESSION["admin_id"] = $id;
+                            $_SESSION["username"] = $username;
                 
-                            header("location: index.php");
-                            exit();
+                            
                         } else {
                             $password_err = "Girilen parola yanlış.";
                         }
+
                     }
                 
                 } else {
-                    $email_err = "Bu e-posta adresiyle ilişkilendirilmiş bir hesap bulunamadı.";
+                    $email_err = "Bu e-posta adresiyle ilişkilendirilmiş bir admin hesabı bulunamadı.";
                 }
             } else {
                 echo "Oops! Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin.";
             }
             mysqli_stmt_close($stmt);
+        }
+        if (empty($password_err)) {
+            header("location: admin.php"); // Doğru yere yönlendirme kodu
+            exit();
         }
     }
     mysqli_close($connection);
@@ -201,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="user-actions">
             <a href="log_in.php" class="btn-login">Giriş Yap</a>
-            <a href="sign_up.php" class="btn-register">Kayıt Ol</a>
+            
         </div>
     </div>
 </header>
@@ -227,11 +230,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary" value="Giriş Yap">
+                    
                 </div>
                 <div class="mb-3">
                     <a href="sifre_yenileme.php">Şifremi unuttum?</a>
                 </div>
-                <p>Hesabınız yok mu? <a href="sign_up.php">Kayıt olun</a>.</p>
+                
             </div>
         </form>
     </div>

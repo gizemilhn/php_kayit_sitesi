@@ -184,7 +184,7 @@ footer a {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .btn-login:hover {
     background-color: #9EB8D9; 
@@ -293,7 +293,7 @@ footer a {
         </div>
         <div class="user-actions">
             <a href="log_in.php" class="btn-login">Giriş Yap</a>
-            <a href="sign_up.php" class="btn-register">Kayıt Ol</a>
+            
         </div>
     </div>
 </header>
