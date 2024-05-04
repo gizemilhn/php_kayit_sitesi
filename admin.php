@@ -161,7 +161,7 @@ footer a {
         </div>
         <div class="user-actions">
             <!-- Çıkış Yap linki -->
-            <a href="logout.php" class="btn-login">Çıkış Yap</a>
+            <a href="index.php" class="btn-login">Çıkış Yap</a>
         </div>
     </div>
 </header>
@@ -169,19 +169,14 @@ footer a {
     <!-- Etkinlik Kartları -->
     <div class="event-container">
         
-        <?php
+<?php
 session_start();
-
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: login.php');
-    exit();
-}
 
 // Veritabanından etkinlikleri al
 $servername = "localhost";
-$username = "kullanici_adi";
-$password = "parola";
-$dbname = "veritabani_adi";
+$username = "root"; // Yönetici kullanıcı adınızı buraya yazın
+$password = ""; // Yönetici parolanızı buraya yazın
+$dbname = "fuar_alani"; // Veritabanı adınızı buraya yazın
 
 // Veritabanı bağlantısını oluştur
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -191,10 +186,8 @@ if ($conn->connect_error) {
     die("Veritabanına bağlanılamadı: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM events";
+$sql = "SELECT * FROM etkinlikler";
 $result = $conn->query($sql);
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>

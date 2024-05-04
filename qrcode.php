@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $etkinlik_bilgileri['etkinlik_adi']; ?></title>
+    <title>QR</title>
     <style>
         /* Basit CSS */
         body {

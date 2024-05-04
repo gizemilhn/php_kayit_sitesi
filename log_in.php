@@ -202,16 +202,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div>
         </div>
-        <div class="user-actions">
-            <a href="log_in.php" class="btn-login">Giriş Yap</a>
-            
+
         </div>
     </div>
 </header>
 <div class="container p-5">
 <a href="index.php" class="btn btn-secondary mb-3">Anasayfa</a>
     <div class="card p-5 ">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="registrationForm">
+        <form action="admin.php" method="POST" id="registrationForm">
             <div class="wrapper">
                 <h2>Giriş Yap</h2>
                 <p>Lütfen giriş yapmak için bilgilerinizi girin.</p>
