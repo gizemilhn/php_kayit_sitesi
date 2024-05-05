@@ -78,21 +78,21 @@
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        margin: 20px auto; /* Sayfa ortasına hizalamak için */
-        width: 40%; /* Kartın genişliğini ayarlayalım */
+        margin: 20px auto; 
+        width: 40%; 
         text-align: center;
         }
 
         .card p {
-        margin: 10px 0; /* Paragraflar arası boşluk */
+        margin: 10px 0; 
         }
 
         .card h4 {
-        margin-top: 0; /* Başlık ile kartın üst kısmı arasındaki boşluğu azalt */
+        margin-top: 0; 
         }
 
         .copyright {
-        text-align: center; /* Telif hakkı bilgisini ortala */
+        text-align: center; 
         }
         </style>
         </style>

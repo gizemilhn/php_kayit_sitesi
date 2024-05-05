@@ -16,9 +16,9 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-image: url('.png'); /* Arkaplan resmini burada belirtin */
-            background-size: cover; /* Resmi ekran boyutuna göre otomatik olarak boyutlandırır */
-            background-position: center; /* Resmi sayfanın ortasına yerleştirir */
+            background-image: url('.png'); 
+            background-size: cover; 
+            background-position: center; 
             background-repeat: no-repeat;
         }
 

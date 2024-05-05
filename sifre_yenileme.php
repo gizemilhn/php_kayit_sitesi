@@ -1,60 +1,60 @@
 <?php
-// Veritabanı bağlantısını yapın
+
 include("connection.php");
 
-// Hata mesajlarını sıfırlayın
+
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $email_err = "";
 
 // Form gönderildiğinde
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     
-    // Kullanıcının girdiği e-posta adresini alın
+    // Kullanıcının girdiği e-posta adresini al
     $email = $_POST["email"];
 
-    // E-posta alanını kontrol edin
+    // E-posta alanını kontrol et
     if(empty($email)){
         $email_err = "Lütfen e-posta adresinizi girin.";
     } else{
-        // E-posta adresini veritabanında kontrol edin
+        // E-posta adresini veritabanında kontrol et
         $query = "SELECT * FROM kullanicilar WHERE email = ?";
         
         if($stmt = mysqli_prepare($connection, $query)){
-            // Parametreleri bağlayın
+            // Parametreleri bağla
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
-            // Parametreleri ayarlayın
+            // Parametreleri ayarla
             $param_email = $email;
             
-            // Sorguyu çalıştırın
+            // Sorguyu çalıştır
             if(mysqli_stmt_execute($stmt)){
-                // Sonuçları alın
+                // Sonuçları al
                 mysqli_stmt_store_result($stmt);
                 
-                // E-posta adresinin veritabanında olup olmadığını kontrol edin
+                // E-posta adresinin veritabanında olup olmadığını kontrol et
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    // E-posta adresi geçerli ise, şifre sıfırlama işlemine başlayın
-                    // Rastgele bir şifre sıfırlama kodu oluşturun
+                    // E-posta adresi geçerli ise, şifre sıfırlama işlemine başla
+                    // Rastgele bir şifre sıfırlama kodu oluştur
                     $reset_token = bin2hex(random_bytes(32));
 
-                    // Şifre sıfırlama kodunu ve kullanıcının e-posta adresini veritabanında güncelleyin
+                    // Şifre sıfırlama kodunu ve kullanıcının e-posta adresini veritabanında güncelle
                     $update_query = "UPDATE kullanicilar SET reset_token = ? WHERE email = ?";
                     
                     if($update_stmt = mysqli_prepare($connection, $update_query)){
-                        // Parametreleri bağlayın
+                        // Parametreleri bağla
                         mysqli_stmt_bind_param($update_stmt, "ss", $param_reset_token, $param_email);
                         
-                        // Parametreleri ayarlayın
+                        // Parametreleri ayarla
                         $param_reset_token = $reset_token;
                         $param_email = $email;
                         
-                        // Sorguyu çalıştırın
+                        // Sorguyu çalıştır
                         if(mysqli_stmt_execute($update_stmt)){
-                            // Şifre sıfırlama bağlantısını oluşturun
+                            // Şifre sıfırlama bağlantısını oluştur
                             $reset_link = "http://example.com/yeni_sifre.php?token=" . $reset_token;
 
-                            // Kullanıcıya şifre sıfırlama bağlantısını içeren bir e-posta gönderin
-                            // Burada e-posta gönderme işlevselliği yer almalıdır
+                            // Kullanıcıya şifre sıfırlama bağlantısını içeren bir e-posta gönder
+                            
 
                             // Şifre sıfırlama bağlantısını gönderdikten sonra kullanıcıyı bilgilendir
                             echo "Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.";
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             echo "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin.";
                         }
 
-                        // Sorguyu kapayın
+                        
                         mysqli_stmt_close($update_stmt);
                     }
                 } else{
@@ -73,12 +73,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin.";
             }
 
-            // Sorguyu kapayın
+            
             mysqli_stmt_close($stmt);
         }
     }
     
-    // Veritabanı bağlantısını kapatın
+   
     mysqli_close($connection);
 }
 ?>

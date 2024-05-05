@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hizmetler</title>
     <style>
-        /* Basit CSS */
+       
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #e6e6e6; /* Arka plan rengi */
+            background-color: #e6e6e6; 
         }
         .container {
             max-width: 800px;

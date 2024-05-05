@@ -88,36 +88,36 @@
             border-radius: 5px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Kartın maksimum genişliğini ayarlayalım */
-            margin-left: auto; /* Kartı sağa yaslayalım */
-            margin-right: auto; /* Kartı sola yaslayalım */
+            max-width: 800px; 
+            margin-left: auto; 
+            margin-right: auto; 
             background-color: #F7E8F0;
         }
 
         .card img {
-            width: 100%; /* Resmi kartın genişliğine göre ayarlayalım */
+            width: 100%; 
         }
 
         .card-body {
             padding: 20px;
-            margin: 20px auto; /* Kart içeriğini yatayda ortala ve kenarlarına 20px boşluk bırak */
+            margin: 20px auto; 
             
             
         }
 
         .card-title {
-            font-size: 18px; /* Kart başlığının font boyutunu küçültelim */
+            font-size: 18px;
             margin-bottom: 10px;
         }
 
         .card-text {
-            font-size: 16px; /* Kart metninin font boyutunu küçültelim */
+            font-size: 16px; 
             line-height: 1.6;
             
         }
 
         .text-body-secondary {
-            font-size: 12px; /* Alt metnin font boyutunu küçültelim */
+            font-size: 12px;
             color: #666;
         }
     </style>

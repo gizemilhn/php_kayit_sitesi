@@ -175,8 +175,8 @@ if(isset($_POST["kaydol"]))
         .logo img {
             margin-left: 10px;
             margin-right: 10px;
-            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+            width: 100px; 
+            height: auto; 
         }
         .menu-items {
             display: flex;
@@ -191,7 +191,7 @@ if(isset($_POST["kaydol"]))
         }
 
         .user-actions {
-            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+            margin-left: auto; 
         }
 
         .user-actions a {
@@ -220,7 +220,7 @@ if(isset($_POST["kaydol"]))
             margin-bottom: 5px;
         }
         .submenu a:hover {
-            background-color: #3cb371; /* Buton rengiyle uyumlu renk */
+            background-color: #3cb371; 
         }
         
         .button {
@@ -336,11 +336,11 @@ if(isset($_POST["kaydol"]))
 <script>
     $(document).ready(function(){
         <?php if(isset($_POST["kaydol"]) && $qr_result !== false) : ?>
-            $('#qrModal').modal('show'); // Show the modal when QR code is generated
+            $('#qrModal').modal('show'); 
         <?php endif; ?>
 
         $('#qrModal').on('hidden.bs.modal', function () {
-            window.location.href = 'index.php'; // Redirect user to index.php when modal is closed
+            window.location.href = 'index.php'; 
         });
     });
 </script>

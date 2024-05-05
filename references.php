@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Referanslarımız</title>
     <style>
-        /* Basit CSS */
+        
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Arka plan rengi */
+            background-color: #f0f0f0; 
         }
         .container {
             max-width: 800px;

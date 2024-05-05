@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuar Alanı Etkinlikleri</title>
     <style>
-        /* Basit CSS */
+       
 body {
     margin: 0;
     padding: 0;
@@ -29,8 +29,8 @@ header {
 .logo img {
     margin-left: 10px;
     margin-right: 10px;
-    width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-    height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+    width: 100px; 
+    height: auto; 
 }
 .menu-items {
     display: flex;
@@ -45,7 +45,7 @@ header {
 }
 
 .user-actions {
-    margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+    margin-left: auto; 
 }
 
 .user-actions a {
@@ -74,7 +74,7 @@ header .menu {
     margin-bottom: 5px;
 }
 .submenu a:hover {
-    background-color: #3cb371; /* Buton rengiyle uyumlu renk */
+    background-color: #3cb371; 
 }
 footer {
     background-color: #516C8D;
@@ -109,22 +109,20 @@ footer a {
 .event-container {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap; /* Kartlar sıralı bir şekilde yerleştirilecek */
+    flex-wrap: nowrap; 
     margin: 0 40px;
 }
 
 .event-card {
     color: #0D242F;
     background-color:#FFF7F1;
-    width: calc(27% - 20px); /* Kartların genişliği eşit olacak ve aralarında 20px boşluk olacak */
     margin-top: 20px;
     margin-right: 20px;
     margin-left : 20px;
-    margin-bottom: 20px; /* Kartlar alt alta yerleştirilecek */
-    border: 1px solid #ccc; /* Kartlara kenarlık ekleyebilirsiniz */
-    border-radius: 5px; /* Kartlara köşe yuvarlama ekleyebilirsiniz */
-    padding: 20px; /* Kartların içeriğinden boşluk bırakabilirsiniz */
-    
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 20px; 
 }
 
 .event-img {
@@ -150,11 +148,11 @@ footer a {
 
 .search-bar {
     margin: 0 auto; 
-    text-align: center; /* İçeriği ortala */
+    text-align: center; 
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-    max-width: 400px; /* Örnek olarak 600px genişliğinde */
+    max-width: 400px; 
     width: 100%;
 }
 .search-bar input[type="text"] {
@@ -242,27 +240,27 @@ footer a {
     height: auto;
 }
         .tooltip {
-    position: relative; /* Görece konumlandırma */
-    display: inline-block; /* Metni logonun yanında görüntülemek için */
+    position: relative; 
+    display: inline-block; 
 }
 
 .tooltip::after {
-    content: attr(title); /* Tooltip içeriğini title niteliğinden al */
-    position: absolute; /* Mutlak konumlandırma */
-    background-color: black; /* Arkaplan rengi */
-    color: white; /* Yazı rengi */
-    padding: 5px; /* İçerik etrafındaki dolgu */
-    border-radius: 5px; /* Kenar yuvarlatma */
-    z-index: 1; /* Diğer öğelerin üzerinde kalması için */
-    opacity: 0; /* Başlangıçta görünmez */
-    transition: opacity 0.3s; /* Geçiş efekti */
-    bottom: 125%; /* Logonun altında */
-    left: 50%; /* Logonun tam ortasında */
-    transform: translateX(-50%); /* Yatayda merkezlemek için */
+    content: attr(title); 
+    position: absolute;
+    background-color: black; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 5px; 
+    z-index: 1; 
+    opacity: 0; 
+    transition: opacity 0.3s; 
+    bottom: 125%; 
+    left: 50%; 
+    transform: translateX(-50%); 
 }
 
 .tooltip:hover::after {
-    opacity: 1; /* Üzerine gelindiğinde görünür hale getir */
+    opacity: 1;
 }
 
         </style>
@@ -274,7 +272,7 @@ footer a {
 <header>
     <div class="container">
         <div class="logo">
-        <span class="tooltip" title="Ana Sayfa"> <!-- title, tooltip içeriğini belirtir -->
+        <span class="tooltip" title="Ana Sayfa"> 
             <a href="index.php"><img src="images/logo_.png" alt="Website Logo"></a>
         </span>
             <div class="home-icon" onclick="goToHomePage()">
@@ -379,7 +377,7 @@ footer a {
     }
 
     function goToHomePage() {
-        window.location.href = "index.php"; // Ana sayfanın URL'sini buraya yazın
+        window.location.href = "index.php"; 
     }
 
     function toggleDropdown() {

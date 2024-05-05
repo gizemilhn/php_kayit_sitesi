@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     mysqli_stmt_bind_result($stmt, $id, $username, $db_password);
                 
                     if (mysqli_stmt_fetch($stmt)) {
-                        if ($password === $db_password) { // Düz metin olarak saklanan parolaları karşılaştır
+                        if ($password === $db_password) { 
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["admin_id"] = $id;
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
         if (empty($password_err)) {
-            header("location: admin.php"); // Doğru yere yönlendirme kodu
+            header("location: admin.php"); 
             exit();
         }
     }
@@ -80,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .logo img {
             margin-left: 10px;
             margin-right: 10px;
-            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+            width: 100px; 
+            height: auto; 
         }
         .menu-items {
             display: flex;
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .user-actions {
-            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+            margin-left: auto; 
         }
 
         .user-actions a {
@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 5px;
         }
         .submenu a:hover {
-            background-color: #3cb371; /* Buton rengiyle uyumlu renk */
+            background-color: #3cb371; 
         }
         .btn-login {
             background-color: #DDDDDD; 
