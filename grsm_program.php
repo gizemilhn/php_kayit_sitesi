@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otomotiv Fuarı</title>
+    <title>Girişim Program</title>
     <style>
         @font-face {
         font-family: 'CustomFont';
@@ -16,7 +16,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #C9BBCF
+            background-color: #C9BBCF;
         }
 
         header {
@@ -80,16 +80,13 @@
             height: auto;
             margin-right: 20px;
         }
-
-       
-
-        
         .card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 20px;
+            background-color: #F7E8F0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            
         }
     h2 {
       text-align: center;
@@ -113,7 +110,7 @@
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
-    @media screen and (max-width: 600px) 
+    @media screen and (max-width: 600px) {
       table {
         border: 0;
       }
@@ -130,11 +127,13 @@
         padding-top: 8px;
         padding-bottom: 8px;
       }
+    }
     </style>
 </head>
 <body>
 <header>
     <img src="images/grsm_logo.png" alt="Girişim Fuarı Logo" class="logo">
+    <h2>Etkinlik Programı</h2>
     <nav>
         <ul>
             <li><a href="grsm_fuar.php" class="button">Ana Sayfa</a></li>

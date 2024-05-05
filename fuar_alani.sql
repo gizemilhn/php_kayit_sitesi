@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 24 Nis 2024, 04:56:11
+-- Üretim Zamanı: 05 May 2024, 19:09:01
 -- Sunucu sürümü: 10.4.32-MariaDB
 -- PHP Sürümü: 8.2.12
 
@@ -117,23 +117,28 @@ CREATE TABLE IF NOT EXISTS `kullanicilar` (
   `ad` varchar(255) NOT NULL,
   `soyad` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `telefon_no` text NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `katilimci_turu` varchar(50) DEFAULT NULL,
-  `qr_code` varchar(255) DEFAULT NULL,
+  `katilimci_turu` varchar(50) NOT NULL,
+  `qr_code` varchar(100) NOT NULL,
+  `etkinlik_adi` varchar(25) NOT NULL,
   PRIMARY KEY (`Katilimci_ID`),
   KEY `idx_kullanici_id` (`Katilimci_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Tablo döküm verisi `kullanicilar`
 --
 
-INSERT INTO `kullanicilar` (`Katilimci_ID`, `ad`, `soyad`, `email`, `telefon_no`, `password`, `katilimci_turu`, `qr_code`) VALUES
-(1, 'Ahmet', 'Yılmaz', 'ahmet@example.com', '1234567890', 'sifre123', 'ziyaretçi', 'qr_code1.png'),
-(2, 'Ayşe', 'Kara', 'ayse@example.com', '0987654321', 'sifre456', 'görevli', 'qr_code2.png'),
-(3, 'Mehmet', 'Demir', 'mehmet@example.com', '5554443322', 'sifre789', 'ziyaretçi', 'qr_code3.png'),
-(6, 'gizem', 'ilhan', 'ilhangiz3m@gmail.com', '05423607039', 'AAAaaa111', 'Görevli', 'qr_code_66286e5d24870.png');
+INSERT INTO `kullanicilar` (`Katilimci_ID`, `ad`, `soyad`, `email`, `katilimci_turu`, `qr_code`, `etkinlik_adi`) VALUES
+(1, 'Ahmet', 'Yılmaz', 'ahmet@example.com', '', '', ''),
+(2, 'Ayşe', 'Kara', 'ayse@example.com', '', '', ''),
+(3, 'Mehmet', 'Demir', 'mehmet@example.com', '', '', ''),
+(27, 'test', 'ilhan', 'denzz.drn@gmail.com', 'Görevli', 'qr_code_6637b291be3fb.png', 'EXPO'),
+(28, '', '', '', '', 'qr_code_6637b29e28ea1.png', 'EXPO'),
+(29, '', '', '', '', 'qr_code_6637b2d2251a6.png', 'EXPO'),
+(30, '', '', '', '', 'qr_code_6637b2d3472da.png', 'EXPO'),
+(31, '', '', '', '', 'qr_code_6637b2d405954.png', 'EXPO'),
+(32, 'gizem', 'ilhan', 'ilhangiz3m@gmail.com', 'Görevli', 'qr_code_6637b2ece9f4d.png', 'EXPO'),
+(33, 'Ahmet Tahsin', '', 'ahmetahsinsoylemez@gmail.com', 'Ziyaretçi', 'qr_code_6637bc926fbe8.png', 'EXPO');
 
 --
 -- Tetikleyiciler `kullanicilar`

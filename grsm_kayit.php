@@ -12,86 +12,80 @@ $surname="";
 $email="";
 $katilimci_turu="";
 $ktlm_err="";
+$etk_ad="Expo";
+$qr_result = false; // QR kodunun başlangıçta oluşturulmadığını belirtmek için
+$success_message = ""; // Başarı mesajı için
+
 
 if(isset($_POST["kaydol"]))
 {
-    // İsim Doğrulama
-    if (empty($_POST["ad"])) {
-        $name_err="İsim Boş bırakılamaz!";
-    }
-    else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["ad"])) {
-        $name_err = "Sadece harf ve boşluk kullanılabilir!";
-    }
-    else {
-        $name=$_POST["ad"];
-    }
+    // Formun dolu olup olmadığını kontrol et
+    if (!empty($_POST["ad"]) && !empty($_POST["soyad"]) && !empty($_POST["email"]) && isset($_POST["katilimci_turu"])) {
+        // İsim Doğrulama
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["ad"])) {
+            $name_err = "Sadece harf ve boşluk kullanılabilir!";
+        }
+        else {
+            $name=$_POST["ad"];
+        }
 
-    // Soyisim Doğrulama
-    if (empty($_POST["soyad"])) {
-       $surname_err="Soyisim alanı boş geçilemez!";
-    }
-    else if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["soyad"])) {
-        $surname_err = "Sadece harf ve boşluk kullanılabilir!";
-    }
-    else {
-        $surname=$_POST["soyad"];
-    }
+        // Soyisim Doğrulama
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["soyad"])) {
+            $surname_err = "Sadece harf ve boşluk kullanılabilir!";
+        }
+        else {
+            $surname=$_POST["soyad"];
+        }
 
-    if (empty ($_POST["email"]))
-    {
-        $email_err="Email alanı boş geçilemez!";
-    }
-    else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $email_err = "Geçersiz email formatı!";
-    }
-    else {
-        $email=$_POST["email"];
-    }
+        if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            $email_err = "Geçersiz email formatı!";
+        }
+        else {
+            $email=$_POST["email"];
+        }
 
-    //Katılımcı türü kontrolü...
-    if (empty($_POST["katilimci_turu"])) {
-        $ktlm_err="Katılımcı türünüzü seçmeniz gerekmektedir.";
-    }
-    else 
-    {
+        //Katılımcı türü kontrolü...
         $katilimci_turu=$_POST['katilimci_turu'];
-    }
-    // QR kod oluşturulacak metin
-    $text = 'Ad: ' . $name . ', Soyad: ' . $surname . ' , Email:'.$email. ', Katılım Türü: ' . $katilimci_turu;
-        $options = new QROptions([
-             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
-             'eccLevel'   => QRCode::ECC_L,
-            'scale'      => 5,
-        ]);
 
-    // QR kod objesini oluştur
-        $qr = new QRCode($options);
-        // QR kodunun dosyaya kaydedileceği klasörün yolu
-        $qr_directory = 'qrcodes/'; 
+        // Formda hata yoksa
+        if(empty($name_err) && empty($surname_err) && empty($email_err)) {
+            // QR kod oluşturulacak metin
+            $text = 'Ad: ' . $name . ', Soyad: ' . $surname . ' , Email:'.$email. ', Katılım Türü: ' . $katilimci_turu. ', Etkinlik Adı:'. $etk_ad ;
+            $options = new QROptions([
+                 'outputType' => QRCode::OUTPUT_IMAGE_PNG,
+                 'eccLevel'   => QRCode::ECC_L,
+                'scale'      => 5,
+            ]);
 
-        // QR kodunun dosya adını oluştur
-        $qr_filename = 'qr_code_' . uniqid() . '.png';
+            // QR kod objesini oluştur
+            $qr = new QRCode($options);
+            // QR kodunun dosyaya kaydedileceği klasörün yolu
+            $qr_directory = 'qrcodes/'; 
 
-        // QR kodunun dosya yolu ve adı
-        $qr_path = $qr_directory . $qr_filename;
+            // QR kodunun dosya adını oluştur
+            $qr_filename = 'qr_code_' . uniqid() . '.png';
 
-        // QR kodu oluştur ve kaydet
-        $qr_result = $qr->render($text, $qr_path);
+            // QR kodunun dosya yolu ve adı
+            $qr_path = $qr_directory . $qr_filename;
+
+            // QR kodu oluştur ve kaydet
+            $qr_result = $qr->render($text, $qr_path);
 
             if($qr_result !== false) {
                 // QR kod oluşturulduysa, kullanıcıyı veritabanına kaydet
-                 // Parolayı güvenli şekilde sakla
-                $ekle = "INSERT INTO kullanicilar (ad, soyad , email, katilimci_turu, qr_code, etkinlik_adi) VALUES ('$name', '$surname','$email','$katilimci_turu', '$qr_filename', 'Girişim')";
+                $ekle = "INSERT INTO kullanicilar (ad, soyad , email, katilimci_turu, qr_code, etkinlik_adi) VALUES ('$name', '$surname','$email','$katilimci_turu', '$qr_filename', 'Expo')";
                 $calistirekle = mysqli_query($connection,$ekle);
-
-                
-            
-            
-
+                $success_message = "Kaydınız başarıyla tamamlandı!";
+            } else {
+                $success_message = "QR kod oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.";
+            }
         }
-    
-    
-}  
+    } else {
+        // Form boşsa hata mesajı göster
+        $success_message = "Lütfen tüm alanları doldurun.";
+    }
+}
+?> 
     
 ?>
 
@@ -237,19 +231,41 @@ if(isset($_POST["kaydol"]))
             
         </div>
         </form>
+        <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="qrModalLabel">Kaydınız Başarıyla Tamamlandı!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Kaydınız başarıyla tamamlandı. QR kodunuz aşağıda gösterilmektedir. QR kodunu indirebilir veya kaydedebilirsiniz.</p>
+        <!-- QR Kodu Gösterme -->
+        <img src="<?php echo $qr_path; ?>" alt="QR Kodu" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <!-- QR Kodunu İndirme Butonu -->
+        <a href="<?php echo $qr_path; ?>" download="qr_code.png" class="btn btn-primary">QR Kodunu İndir</a>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function(){
+        <?php if(isset($_POST["kaydol"]) && $qr_result !== false) : ?>
+            $('#qrModal').modal('show'); // Show the modal when QR code is generated
+        <?php endif; ?>
 
-<script type="text/javascript">
-    <?php if ($qr_result !== false) : ?>
-        // Popup mesajını göstermek için bir JavaScript fonksiyonu
-        function showPopup() {
-            alert("Kaydınız başarıyla tamamlandı. QR kodunuz e-posta adresinize gönderilmiştir.");
-        }
-        // sayfa yüklendiğinde popup mesajını göster
-        window.onload = showPopup;
-    <?php endif; ?>
-</script>
+        $('#qrModal').on('hidden.bs.modal', function () {
+            window.location.href = 'index.php'; // Redirect user to index.php when modal is closed
+        });
+    });
+</body>
 </body>
 </html>

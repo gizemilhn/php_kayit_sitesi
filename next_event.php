@@ -50,11 +50,57 @@
         .btn-more:hover {
             background-color: #0056b3;
         }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        footer .footer-content .col {
+            flex: 1 1 20%;
+            margin: 10px;
+        }
+        footer h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        footer a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .custom-button {
+            background-color: #8fbc8f; 
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            background-color: #3cb371; 
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+<div class="mb-3">
+            <button class="custom-button" onclick="goToIndexPage()">Ana Sayfa</button>
+            </div>
     <h1>Gelecek Etkinlikler</h1>
 
     <?php
@@ -79,7 +125,8 @@
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo "<div class='event-card'>";
-            echo "<img src='" . $row['etkinlik_gorseli'] . "' class='event-img' alt='Etkinlik Görseli'>";
+            // Etkinlik görselini göster
+            echo "<img src='/etkinlik_gorselleri/" . $row['etkinlik_id'] . "_etkinlik.jpg' class='event-img' alt='Etkinlik Görseli'>";
             echo "<div class='event-details'>";
             echo "<h2>" . $row['etkinlik_adi'] . "</h2>";
             echo "<p>" . $row['tanim'] . "</p>";
@@ -94,6 +141,50 @@
     ?>
 
 </div>
+<footer>
+    <div class="footer-content">
+        <div class="col">
+            <h4>Bize Ulaşın</h4>
+            <p><strong>Address:</strong> Konferans Etkinlikleri Ltd. Şti. İstanbul</p>
+            <p><strong>Telefon:</strong> +90 (544) 199 4254</p>
+            <p><strong>Çalışma Saatleri:</strong> 08:00 - 20:00, Pazartesi - Cumartesi</p>
+        </div>
+        <div class="col">
+            <h4>Hakkında</h4>
+            <a href="#">Hakkımızda</a>
+            <a href="#">Etkinliklerimiz</a>
+            <a href="#">Gizlilik Politikası</a>
+            <a href="#">Şartlar ve koşullar</a>
+            <a href="#">Bize Ulaşın</a>
+        </div>
+        <div class="col">
+            <h4>Hesap</h4>
+            <a href="#">Giriş Yap</a>
+            <a href="#">Kayıt Ol</a>
+            <a href="#">Etkinliklerim</a>
+            <a href="#">Sipariş Takip</a>
+            <a href="#">Yardım</a>
+        </div>
+        <div class="col">
+            <h4>Uygulamayı İndir</h4>
+            <p>Google Play veya App Store</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="">
+                <img src="img/pay/play.jpg" alt="">
+            </div>
+            <p>Güvenli Ödeme</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© Konferans Etkinlikleri Ltd. Şti. - Tüm Hakları Saklıdır.</p>
+    </div>
+</footer>
+<script>
+        function goToIndexPage() {
+            window.location.href = "index.php"; 
+        }
+    </script>
 
 </body>
 </html>

@@ -1,3 +1,35 @@
+<?php
+// Veritabanı bağlantısı için bilgiler
+$servername = "localhost"; // Sunucu adı
+$username = "root"; // Veritabanı kullanıcı adı
+$password = ""; // Veritabanı şifresi
+$dbname = "fuar_alani"; // Veritabanı adı
+
+// Veritabanı bağlantısını oluşturma
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Bağlantıyı kontrol etme
+if ($conn->connect_error) {
+    die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
+}
+
+// Toplam etkinlik sayısını almak için sorgu
+$sql_total_events = "SELECT COUNT(*) as total_events FROM etkinlikler2";
+$result_total_events = $conn->query($sql_total_events);
+$row_total_events = $result_total_events->fetch_assoc();
+$total_events = $row_total_events["total_events"];
+
+// Kayıtlı kullanıcı sayısını almak için sorgu
+$sql_total_users = "SELECT COUNT(*) as total_users FROM kullanicilar";
+$result_total_users = $conn->query($sql_total_users);
+$row_total_users = $result_total_users->fetch_assoc();
+$total_users = $row_total_users["total_users"];
+
+// Kayıtlı kullanıcıların listesi için sorgu
+$sql_users = "SELECT * FROM kullanicilar";
+$result_users = $conn->query($sql_users);
+?>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,159 +38,164 @@
     <title>Admin Paneli</title>
     <style>
         body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-header {
-    background-color: #516C8D;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-.logo {
-    display: flex;
-    align-items: center;
-}
-.logo img {
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
-    height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
-}
-.menu-items {
-    display: flex;
-}
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #DDDDDD;
+        }
 
-.menu-item {
-    margin-right: 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.menu-item:last-child {
-    margin-right: 0;
-}
+        header {
+            background-color: #516C8D;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.user-actions {
-    margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
-}
+        .logo img {
+            margin-left: 10px;
+            width: 100px; /* İstediğiniz genişlik değerini buraya yazabilirsiniz */
+            height: auto; /* Genişliğe göre otomatik olarak boyutlandırma yapılması için */
+        }
 
-.user-actions a {
-    margin-left: 10px;
-}
+        .menu-items {
+            display: flex;
+            align-items: center;
+        }
 
-header .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.menu-item:hover .submenu {
-    display: block;
-}
-.submenu {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    padding: 10px;
-    z-index: 1;
-}
-.submenu a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    margin-bottom: 5px;
-}
-.submenu a:hover {
-    background-color: #3cb371; /* Buton rengiyle uyumlu renk */
-}
-footer {
-    background-color: #516C8D;
-    color: #0D242F;
-    padding: 20px 0;
-    text-align: center;
-}
-footer .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-footer .footer-content .col {
-    flex: 1 1 20%;
-    margin: 10px;
-}
-footer h4 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-footer p {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-footer a {
-    font-size: 14px;
-    text-decoration: none;
-    color: #0D242F;
-    display: block;
-    margin-bottom: 5px;
-}
-.event-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap; /* Kartlar sıralı bir şekilde yerleştirilecek */
-    margin: 0 40px;
-}
+        .menu-item {
+            margin-right: 20px;
+        }
 
-.event-card {
-    color: #0D242F;
-    background-color:#FFF7F1;
-    width: calc(27% - 20px); /* Kartların genişliği eşit olacak ve aralarında 20px boşluk olacak */
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left : 20px;
-    margin-bottom: 20px; /* Kartlar alt alta yerleştirilecek */
-    border: 1px solid #ccc; /* Kartlara kenarlık ekleyebilirsiniz */
-    border-radius: 5px; /* Kartlara köşe yuvarlama ekleyebilirsiniz */
-    padding: 20px; /* Kartların içeriğinden boşluk bırakabilirsiniz */
-    
-}
+        .user-actions {
+            margin-left: auto; /* Kullanıcı işlemlerini sağa hizalamak için */
+        }
 
-.event-img {
-    display: block;
-    width: 300px; 
-    height: auto;
-    margin: 0 auto;
-    border-radius: 5px;
+        .user-actions a {
+            margin-right:10px;
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
 
-}
+        .user-actions a:hover {
+            background-color: #2C3E50;
+        }
 
-.event-details {
-    flex: 1;
-    overflow: hidden;
-    
-}
-.event-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
+        .statistics {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
 
+        .statistics h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .statistics p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .user-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .user-list h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .user-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .user-list li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .user-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            background-color: #516C8D;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-content .col {
+            flex: 1 1 20%;
+            margin: 10px;
+        }
+
+        footer h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        footer a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .add-event-button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            background-color: #516C8D;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-event-button:hover {
+            background-color: #2C3E50;
+        }
     </style>
 </head>
-<body style="background-color: #DDDDDD;">
+<body>
 <header>
-    <div class="container">
         <div class="logo">
             <a href="index.php"><img src="images/logo_.png" alt="Website Logo"></a>
         </div>
-        <div class="menu-items">
-            <!-- Admin Paneli linki -->
-            <a href="#" class="menu-button">Admin Paneli</a>
-        </div>
+        
         <div class="user-actions">
             <!-- Çıkış Yap linki -->
             <a href="index.php" class="btn-login">Çıkış Yap</a>
@@ -166,55 +203,23 @@ footer a {
     </div>
 </header>
 <div class="container">
-    <!-- Etkinlik Kartları -->
-    <div class="event-container">
-        
-<?php
-session_start();
-
-// Veritabanından etkinlikleri al
-$servername = "localhost";
-$username = "root"; // Yönetici kullanıcı adınızı buraya yazın
-$password = ""; // Yönetici parolanızı buraya yazın
-$dbname = "fuar_alani"; // Veritabanı adınızı buraya yazın
-
-// Veritabanı bağlantısını oluştur
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Bağlantıyı kontrol et
-if ($conn->connect_error) {
-    die("Veritabanına bağlanılamadı: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM etkinlikler";
-$result = $conn->query($sql);
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Paneli</title>
-</head>
-<body>
+    <!-- Admin Paneli içeriği -->
+    <a href="add_event.php" class="add-event-button">Etkinlik Ekle</a>
+    <br>
     <h2>Admin Paneli</h2>
-    <a href="add_event.php">Etkinlik Ekle</a>
-    <ul>
-        <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<li>" . $row["title"] . " - " . $row["date"] . "</li>";
-            }
-        } else {
-            echo "Mevcut etkinlik yok";
-        }
-        ?>
-    </ul>
-    <a href="index.php">Çıkış Yap</a>
-</body>
-</html>
-</div>
+    <div class="statistics">
+        <h3>İstatistikler</h3>
+        <p>Toplam Etkinlik Sayısı: <?php echo $total_events; ?></p>
+        <p>Kayıtlı Kullanıcı Sayısı: <?php echo $total_users; ?></p>
+    </div>
+    <div class="user-list">
+        <h3>Kayıtlı Kullanıcılar</h3>
+        <ul>
+            <?php while ($row_user = $result_users->fetch_assoc()): ?>
+                <li><?php echo $row_user["ad"] . " " . $row_user["soyad"] . " - " . $row_user["email"]; ?></li>
+            <?php endwhile; ?>
+        </ul>
+    </div>
 </div>
 <footer>
     <div class="footer-content">
@@ -257,3 +262,8 @@ $result = $conn->query($sql);
 </footer>
 </body>
 </html>
+
+<?php
+// Veritabanı bağlantısını kapatma
+$conn->close();
+?>

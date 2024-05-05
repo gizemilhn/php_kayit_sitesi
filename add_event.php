@@ -54,10 +54,26 @@
         .event-card button[type="submit"]:hover {
             background-color: #2C3E50;
         }
+        .custom-button {
+            background-color: #DDDDDD; 
+            color: #0D242F;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-right: 5px;
+        }
+        .custom-button:hover{
+            background-color: #9EB8D9;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+<div class="mb-3">
+            <button class="custom-button" onclick="goToIndexPage()">Ana Sayfa</button>
+            </div>
     <div class="event-card">
         <h2>Etkinlik Ekle</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
@@ -105,6 +121,21 @@
 
             if ($conn->query($sql) === TRUE) {
                 echo '<p style="color: green;">Yeni etkinlik başarıyla eklendi</p>';
+
+                // Son eklenen etkinlik ID'sini al
+                $etkinlik_id = $conn->insert_id;
+
+                // Etkinlik adı ile etkinlik ID'sini birleştirerek dosya adını oluştur
+                $dosya_adı = $etkinlik_id . "_etkinlik.jpg";
+                $gecici_dizin = $_FILES['eventImage']['tmp_name'];
+                $hedef_dizin = "C:/xampp/htdocs/etkinlik_gorselleri/" . $dosya_adı;
+
+                // Dosyayı taşıma işlemi
+                if (move_uploaded_file($gecici_dizin, $hedef_dizin)) {
+                    echo '<p style="color: green;">Dosya başarıyla yüklendi</p>';
+                } else {
+                    echo '<p style="color: red;">Dosya yüklenirken bir hata oluştu</p>';
+                }
             } else {
                 echo '<p style="color: red;">Hata: ' . $sql . "<br>" . $conn->error . '</p>';
             }
@@ -114,5 +145,11 @@
         ?>
     </div>
 </div>
+<script>
+        function goToIndexPage() {
+            window.location.href = "admin.php"; 
+        }
+    </script>
+
 </body>
 </html>
