@@ -282,7 +282,7 @@ footer a {
             </div>
         </div>
         <div class="menu-items">
-            <a href="schedule.php" class="menu-button">Fuar Takvimi</a>
+            <a href="next_event.php" class="menu-button">Gelecek Etkinlikler</a>
             <a href="hizmetler.php" class="menu-button">Hizmetlerimiz</a>
             <a href="references.php" class="menu-button">Referanslarımız</a>
             <a href="etkinlik_yarat.php" class="menu-button">Etkinliğini Yarat</a>

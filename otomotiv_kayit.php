@@ -5,9 +5,11 @@ require_once __DIR__.'/vendor/autoload.php';
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 
+$email_err="";
 $name_err=$surname_err="";
 $name="";
 $surname="";
+$email="";
 $katilimci_turu="";
 $ktlm_err="";
 
@@ -35,6 +37,17 @@ if(isset($_POST["kaydol"]))
         $surname=$_POST["soyad"];
     }
 
+    if (empty ($_POST["email"]))
+    {
+        $email_err="Email alanı boş geçilemez!";
+    }
+    else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $email_err = "Geçersiz email formatı!";
+    }
+    else {
+        $email=$_POST["email"];
+    }
+
     //Katılımcı türü kontrolü...
     if (empty($_POST["katilimci_turu"])) {
         $ktlm_err="Katılımcı türünüzü seçmeniz gerekmektedir.";
@@ -43,59 +56,43 @@ if(isset($_POST["kaydol"]))
     {
         $katilimci_turu=$_POST['katilimci_turu'];
     }
-    
-    
-            // QR kod oluşturulacak metin
-            $text = 'Ad: ' . $name . ', Soyad: ' . $surname . ', Katılım Türü: ' . $katilimci_turu;
+    // QR kod oluşturulacak metin
+    $text = 'Ad: ' . $name . ', Soyad: ' . $surname . ' , Email:'.$email. ', Katılım Türü: ' . $katilimci_turu;
+        $options = new QROptions([
+             'outputType' => QRCode::OUTPUT_IMAGE_PNG,
+             'eccLevel'   => QRCode::ECC_L,
+            'scale'      => 5,
+        ]);
 
-            // QR kod seçeneklerini ayarla
-            $options = new QROptions([
-                'outputType' => QRCode::OUTPUT_IMAGE_PNG,
-                'eccLevel'   => QRCode::ECC_L,
-                'scale'      => 5,
-            ]);
+    // QR kod objesini oluştur
+        $qr = new QRCode($options);
+        // QR kodunun dosyaya kaydedileceği klasörün yolu
+        $qr_directory = 'qrcodes/'; 
 
-            // QR kod objesini oluştur
-            $qr = new QRCode($options);
-            // QR kodunun dosyaya kaydedileceği klasörün yolu
-            $qr_directory = 'qrcodes/'; 
+        // QR kodunun dosya adını oluştur
+        $qr_filename = 'qr_code_' . uniqid() . '.png';
 
-            // QR kodunun dosya adını oluştur
-            $qr_filename = 'qr_code_' . uniqid() . '.png';
+        // QR kodunun dosya yolu ve adı
+        $qr_path = $qr_directory . $qr_filename;
 
-            // QR kodunun dosya yolu ve adı
-            $qr_path = $qr_directory . $qr_filename;
-
-            // QR kodu oluştur ve kaydet
-            $qr_result = $qr->render($text, $qr_path);
+        // QR kodu oluştur ve kaydet
+        $qr_result = $qr->render($text, $qr_path);
 
             if($qr_result !== false) {
                 // QR kod oluşturulduysa, kullanıcıyı veritabanına kaydet
                  // Parolayı güvenli şekilde sakla
-                $ekle = "INSERT INTO kullanicilar (ad, soyad, katilimci_turu, qr_code) VALUES ('$name', '$surname','$katilimci_turu', '$qr_filename')";
+                $ekle = "INSERT INTO kullanicilar (ad, soyad , email, katilimci_turu, qr_code, etkinlik_adi) VALUES ('$name', '$surname','$email','$katilimci_turu', '$qr_filename', 'Otosan')";
                 $calistirekle = mysqli_query($connection,$ekle);
 
-                // sign_up.php
-
-                if ($calistirekle) {
-                    // Kayıt başarılıysa, kullanıcıyı qrcode.php sayfasına yönlendir
-                    $redirect_url = "qrcode.php?name=" . urlencode($name) . "&surname=" . urlencode($surname);
-                } else {
-                    // Kayıt başarısızsa, ana sayfaya yönlendir
-                    $redirect_url = "yzlm_fuar.php";
-                }
-
-            } else {
-                echo '<div class="alert alert-danger" role="alert">
-                QR kodu oluşturulurken bir hata meydana geldi, lütfen tekrar deneyiniz!
-                </div>';
-            }
-            header("Location: $redirect_url");
-            exit();
+                
+            
+            
 
         }
     
-
+    
+}  
+    
 ?>
 
 
@@ -198,7 +195,7 @@ if(isset($_POST["kaydol"]))
     <a href="otmtv_fuar.php" class="btn btn-secondary mb-3">Geri</a>
     <div class="card p-5 ">
     <h2>Kayıt Formu</h2>
-        <form action="sign_up.php" method="POST" id="registrationForm">
+            <form method="POST" id="registrationForm">
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Ad</label>
                 <input type="text" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" id="exampleInputName" name="ad">
@@ -209,6 +206,12 @@ if(isset($_POST["kaydol"]))
                 <input type="text" class="form-control <?php echo (!empty($surname_err)) ? 'is-invalid' : ''; ?>" id="exampleInputSurname" name="soyad">
                 <div class="invalid-feedback"><?php echo $surname_err; ?></div>
             </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" id="exampleInputEmail" name="email">
+                <div class="invalid-feedback"><?php echo $email_err; ?></div>
+            </div>
+
 
             <div>
             <select class="form-select mb-3" name="katilimci_turu" aria-label="Katılım türünü seçiniz.">
@@ -223,9 +226,18 @@ if(isset($_POST["kaydol"]))
                  ?>
                 
             </select>
-            <a href="qrcode.php" button type="submit"style="background-color: #F4E6B3" name="kaydol" class="btn" id="submitBtn">Kayıt Ol</button></a>
-        </form>
+            <button type="submit" style="background-color: #F4E6B3" name="kaydol" class="btn" id="submitBtn">Kayıt Ol</button>
     </div>
 </div>
+<script type="text/javascript">
+    <?php if ($qr_result !== false) : ?>
+        // Popup mesajını göstermek için bir JavaScript fonksiyonu
+        function showPopup() {
+            alert("Kaydınız başarıyla tamamlandı. QR kodunuz e-posta adresinize gönderilmiştir.");
+        }
+        // sayfa yüklendiğinde popup mesajını göster
+        window.onload = showPopup;
+    <?php endif; ?>
+</script>
 </body>
 </html>
